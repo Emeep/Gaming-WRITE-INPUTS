@@ -8,7 +8,9 @@ from pynput.keyboard import Key, Controller
 
 keyboard = Controller()
 
-pytesseract.pytesseract.tesseract_cmd = 'D:\\Python_Tesseract\\tesseract.exe'
+# for this you want to install pytesseract (if you have any trouble just google it or something)
+# replace your path with the path to tesseract.exe file
+pytesseract.pytesseract.tesseract_cmd = 'your path\\tesseract.exe'
 cap = cv2.VideoCapture(0)
 ret, frame = cap.read()
 
@@ -51,7 +53,8 @@ def Inputs(data: str):
 
 while True:
     success, imgo = cap.read()
-
+    
+    # adjust the imgo stuff until it suits your set up
     imgo = cv2.flip(imgo, -1)
     imgo = cv2.resize(imgo, (540, 540), interpolation = cv2.INTER_AREA)
 
@@ -67,9 +70,9 @@ while True:
     boxes = pytesseract.image_to_boxes(img, config=custom_config)
     res = pytesseract.image_to_string(img, config=custom_config)
     # print(res)
-    print(boxes)
+    # print(boxes)
 
-    # Inputs(data=str(res))
+    Inputs(data=str(res))
 
     h, w = img.shape
     for b in boxes.splitlines():
